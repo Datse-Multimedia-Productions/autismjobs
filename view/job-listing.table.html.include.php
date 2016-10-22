@@ -31,8 +31,8 @@
 	<fieldset>
 	<legend>How to Apply</legend>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaPostalAddress" id="applyViaPostalAddress" class="hideSelect" onClick="hideUnselected('postalAddress')"><label class="checkboxLabel" for="applyViaPostalAddress">Postal Address</legend></label></legend>
-			<div id="postalAddreess" class="hidable">
+			<legend><input type="checkbox" name="applyVia" value="applyViaPostalAddress" id="applyViaPostalAddress" class="hideSelect" onClick="hideUnselected('postalAddress', 'applyViaPostalAddress')"><label class="checkboxLabel" for="applyViaPostalAddress">Postal Address</label></legend>
+			<div class="postalAddress hidable">
 				<label for="applyViaPostalStreet">Steet Address</label>:
 				<input type="text" name="applyViaPostalStreet" id="applyViaPostalStreet"><br />
                 		<label for="applyViaPostalCity">City</label>:
@@ -48,25 +48,27 @@
 			</div>
 		</fieldset>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaInPerson" id="applyViaInPerson"><label class="checkboxLabel" for="applyViaInPerson">In Person</label></legend>
-			<label for="applyViaInPersonStreet">Steet Address</label>:
-			<input type="text" name="applyViaInPersonStreet" id="applyViaInPersonStreet"><br />
-	                <label for="applyViaInPersonCity">City</label>: 
-			<input type="text" name="applyViaInPersonCity" id="applyViaInPersonCity"><br />
-        	        <label for="applyViaInPersonRegion">Region</label>:
-			<input type="text" name="applyViaInPersonRegion" id="applyViaInPersonRegion"><br />
-                	<label for="applyViaInPersonProvince">Province or State</label>:
-			<input type="text" name="applyViaInPersonProv" id="applyViaInPersonProvince"><br />
-	                <label for="applyViaInPersonCountry">Country</label>: 
-			<input type="text" name="applyViaInPersonCountry" id="applyViaInPersonCountry"><br />
+			<legend><input type="checkbox" name="applyVia" value="applyViaInPerson" id="applyViaInPerson" onClick="hideUnselected('inPerson', 'applyViaInPerson')"><label class="checkboxLabel" for="applyViaInPerson">In Person</label></legend>
+			<div class="inPerson hidable">
+				<label for="applyViaInPersonStreet">Steet Address</label>:
+				<input type="text" name="applyViaInPersonStreet" id="applyViaInPersonStreet"><br />
+	        	        <label for="applyViaInPersonCity">City</label>: 
+				<input type="text" name="applyViaInPersonCity" id="applyViaInPersonCity"><br />
+	        	        <label for="applyViaInPersonRegion">Region</label>:
+				<input type="text" name="applyViaInPersonRegion" id="applyViaInPersonRegion"><br />
+                		<label for="applyViaInPersonProvince">Province or State</label>:
+				<input type="text" name="applyViaInPersonProv" id="applyViaInPersonProvince"><br />
+		                <label for="applyViaInPersonCountry">Country</label>: 
+				<input type="text" name="applyViaInPersonCountry" id="applyViaInPersonCountry"><br />
+			</div>
 		</fieldset>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaEnail" id="applyViaEmail"><label class="checkboxLabel" for="applyViaEmail">Email</label></legend>
-			<label for="applyViaEmailAddres">Address</label>: <input type="text" name="applyViaEmailAddress" id="applyViaEmailAddress">
+			<legend><input type="checkbox" name="applyVia" value="applyViaEmail" id="applyViaEmail" onClick="hideUnselected('email', 'applyViaEmail')"><label class="checkboxLabel" for="applyViaEmail">Email</label></legend>
+			<span class="hidable email"><label for="applyViaEmailAddres">Address</label>: <input  type="text" name="applyViaEmailAddress" id="applyViaEmailAddress"></span>
 		</fieldset>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaWebsite" id="applyViaWebsite"><label class="checkboxLabel" for="applyViaWebsite">Website</label></legend>
-			<label for="applyViaWebsiteAddress">Address</label>: <input type="text" name="applyViaWebsiteAddress" id="applyViaWebsiteAddress">
+			<legend><input type="checkbox" name="applyVia" value="applyViaWebsite" id="applyViaWebsite" onClick="hideUnselected('website', 'applyViaWebsite')"><label class="checkboxLabel" for="applyViaWebsite">Website</label></legend>
+			<span class="hidable website"><label for="applyViaWebsiteAddress">Address</label>: <input type="text" name="applyViaWebsiteAddress" id="applyViaWebsiteAddress"></span>
 		</fieldset>
 	</fieldset>
 	<fieldset>
