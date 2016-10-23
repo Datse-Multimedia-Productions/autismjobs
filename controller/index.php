@@ -1,5 +1,4 @@
 <?php 
-
 /**
  * Main controller for the project
  * 
