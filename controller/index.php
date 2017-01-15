@@ -1,6 +1,6 @@
 <?php 
 /**
- * Main controller for the project
+ * Main controller for the project.
  * 
  * This is the main controller file for this project.
  * It is called by `/index.php`.
@@ -16,7 +16,8 @@
  */
 
 /**
- *
+ * Does this need something 
  */
-
+function phpdoc(){
+}
  
