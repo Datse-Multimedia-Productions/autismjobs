@@ -8,7 +8,7 @@ $configuration = array (
 		"dbname" => "pleaseset",
 		"user" => "setuser",
 		"password" => "setpassword"
-	)
-	"configured" => TRUE;
-}
+	),
+	"configured" => TRUE
+);
 
