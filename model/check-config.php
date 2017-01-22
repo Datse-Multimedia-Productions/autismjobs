@@ -2,20 +2,20 @@
 
 echo "This should check the configuration<br />";
 
-function checkAll() {
+function checkAll($configArray) {
 	echo "checking configuration<br />";
 	echo "checking database<br />";
-	checkDatabase();
+	checkDatabase($configArray);
 }
 
-function checkDatabase () {
+function checkDatabase ($configArray) {
 	echo "checking database configuration<br />";
-	if (array_key_exists("database", $config)) {
+	if (array_key_exists("database", $configArray)) {
 		echo "database configuration exists<br />";
 	} else {
 		echo "database configuration does not exist<br />";
 	}
 }
 
-checkAll(); // Call to check all elements in configuration
+checkAll($config); // Call to check all elements in configuration
 

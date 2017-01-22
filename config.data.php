@@ -12,4 +12,6 @@ $config = array (
 	"configured" => TRUE
 );
 
+print_r($config);
+
 ?>
