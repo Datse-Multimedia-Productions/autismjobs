@@ -1,6 +1,6 @@
 <?php 
 
-$configuration = array (
+$config = array (
 	"database" => array (
 		"type" => "postgresql",
 		"host" => "localhost",
@@ -12,3 +12,4 @@ $configuration = array (
 	"configured" => TRUE
 );
 
+?>

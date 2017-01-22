@@ -4,9 +4,11 @@ if (!file_exists("config.data.php")) {
 	echo "This is not configured";
 	echo "please configure this.";
 } else {
-	echo "configured, this should call the controller<br />";
-	echo "load configuration<br />";
+	// configured, this should call the controller
+	// load configuration
 	require_once ("config.data.php");
+	echo "configuration loaded...  Check validity.<br />";
+	require_once ("model/check-config.php"); // This may not work quite right putting this here.
 	echo "call controller<br />";
 	require_once ("controller/index.php");
 }
