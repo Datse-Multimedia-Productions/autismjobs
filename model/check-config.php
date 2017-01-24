@@ -1,21 +1,61 @@
 <?php 
 
-echo "This should check the configuration<br />";
+// This should check the configuration.
 
 function checkAll($configArray) {
-	echo "checking configuration<br />";
-	echo "checking database<br />";
-	checkDatabase($configArray);
+	// checking configuration.
+	// checking database.
+	if (testKeyExists("database", "Database Section Exists", $configArray)) {
+		// Checking Database
+		checkDatabase($configArray["database"]);
+		// Database Checked
+	}
+	// other checks should becalled from here.
 }
 
-function checkDatabase ($configArray) {
-	echo "checking database configuration<br />";
-	if (array_key_exists("database", $configArray)) {
-		echo "database configuration exists<br />";
+function testKeyExists($key, $successMessage, $array) {
+	if (array_key_exists($key, $array)) { 
+		return (trigger_error($successMessage));
 	} else {
-		echo "database configuration does not exist<br />";
+		return (trigger_error("Key: \"$key\" does not exist", E_USER_WARNING));
 	}
 }
 
-checkAll($config); // Call to check all elements in configuration
+function testKeyValue($key, $values, $valueMessageList, $array) {
+	// testing array for value of $key
+	if (array_key_exists($key, $array)) {
+		if (in_array($array[$key], $values)) {
+			return (trigger_error($valueMessageList[$array[$key]]));
+		} else {
+			return (trigger_error("For key: \"$key\" value: \"$array[$key]\" is not supported", E_USER_WARNING));
+		}
+	} else {
+		return (trigger_error("Key $key, is not set in array", E_USER_WARNING));
+	}
+}
+
+function checkDatabase ($configArray) {
+	// checking database configuration
+	if (!(testKeyValue("type", array("psql"), array("psql"=>"Postgresql Database Configuration"), $configArray))) {
+		return(1);
+	}
+	if (!(testKeyExists("host", "host is defined", $configArray))) {
+		return(1);
+	} 
+	if (!(testKeyExists("port", "port defined", $configArray))) {
+		return(1);
+	} 
+	if (!(testKeyExists("dbname", "database name defined", $configArray))) {
+		return(1);
+	} 
+	if (!(testKeyExists("user", "database user defined", $configArray))) {
+		return(1);
+	} 
+	if (!(testkeyExists("password", "database password defined", $configArray))) {
+		return(1);
+	}
+	return(0);
+	
+}
+
 

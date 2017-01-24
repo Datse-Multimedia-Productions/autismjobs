@@ -2,7 +2,7 @@
 
 $config = array (
 	"database" => array (
-		"type" => "postgresql",
+		"type" => "psql",
 		"host" => "localhost",
 		"port" => "5432",
 		"dbname" => "pleaseset",
@@ -12,6 +12,6 @@ $config = array (
 	"configured" => TRUE
 );
 
-print_r($config);
+// print_r($config); // this is for diagnostic purposes...  Should be removed.
 
 ?>
