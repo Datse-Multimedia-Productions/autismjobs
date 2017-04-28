@@ -14,10 +14,14 @@ require_once("header.html.php");
 	<li><a href="/index.php?action=register">Register</a></li>
 </ul>
 
+<h2>Add A Job Listing</h2>
+
+<?php include("view/job-listing.table.html.include.php"); ?>
+
 <h2>Job Listings</h2>
-	<p>Here are your job listings</p>
-	<ul>
-		<li><a href="job00001.html">Autism Jobs Quality Assurance</a></li>
-	</ul>
+<p>Here are your job listings</p>
+<ul>
+	<li><a href="job00001.html">Autism Jobs Quality Assurance</a></li>
+</ul>
 
 <?php require_once("footer.html.php"); ?>
