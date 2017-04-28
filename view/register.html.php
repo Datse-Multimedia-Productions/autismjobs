@@ -13,7 +13,7 @@ require("actions.html.include.php");
 
 <h2>Add A Job Listing</h2>
 
-<?php include("register.form.include.html.php"); ?>
+<?php include("register.form.html.include.php"); ?>
 
 <h2>Job Listings</h2>
 <p>Here are your job listings</p>
