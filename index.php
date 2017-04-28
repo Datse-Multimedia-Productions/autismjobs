@@ -1,6 +1,6 @@
 <?php 
 
-error_reporting(E_ERROR & ~E_WARNING);
+error_reporting(E_ALL);
 
 if (!file_exists("config.data.php")) {
 	echo "This is not configured";
