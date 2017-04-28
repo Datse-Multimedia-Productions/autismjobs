@@ -5,10 +5,10 @@ $pageHead="Autism Jobs Home Page";
 
 require_once("header.html.php");
 ?>
-<p>We were reading (more scanning) on Hacker News about someone who created a website for older people in the tech industry, so decided to give it a try to do similar for Autistic people, and companies supporting Autistics</p>
+<p>We were reading (more scanning) on Hacker News about someone who created a website for older people in the tech industry, so decided to give it a try to do similar for Autistic people, and companies supporting Autistics.</p>
 
 <?php
-require("actions.html.php");
+require_once("actions.html.include.php");
 ?>
 
 <h2>Job Listings</h2>

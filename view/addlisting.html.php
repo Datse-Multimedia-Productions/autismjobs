@@ -8,7 +8,7 @@ require_once("header.html.php");
 <p>We were reading (more scanning) on Hacker News about someone who created a website for older people in the tech industry, so decided to give it a try to do similar for Autistic people, and companies supporting Autistics</p>
 
 <?php
-require("actions.html.php");
+require("actions.html.include.php");
 ?>
 
 <h2>Add A Job Listing</h2>
