@@ -1,15 +1,15 @@
 CREATE TABLE users (
-	userid		SERIAL,
-	username	VARCHAR(80),
-	password	CHAR(32),
-	created		TIMESTAMP,
+	userid		INT UNSIGNED PRIMARY KEY NOT NULL UNIQUE,
+	username	VARCHAR(80) NOT NULL,
+	password	CHAR(32) NOT NULL,
+	created		TIMESTAMP NOT NULL,
 	lastlogin	TIMESTAMP
 )
 
 CREATE TABLE profiles (
-	profileid	SERIAL,
-	userid		INTEGER NOT NULL,
+	profileid	INT UNSIGNED PRIMARY KEY NOT NULL UNIQUE,
+	userid		INTEGER NOT NULL REFERENCES users (userid),
 	displayname	VARCHAR(80),
-	primaryemail	VARCHAR(255)
+	primaryemail	VARCHAR(255) NOT NULL
 }
 
