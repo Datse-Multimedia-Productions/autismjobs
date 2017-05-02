@@ -31,7 +31,7 @@
 	<fieldset>
 	<legend>How to Apply</legend>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaPostalAddress" id="applyViaPostalAddress" class="hideSelect" onClick="hideUnselected('postalAddress', 'applyViaPostalAddress')"><label class="checkboxLabel" for="applyViaPostalAddress">Postal Address</label></legend>
+			<legend><input type="checkbox" name="applyVia" value="applyViaPostalAddress" id="applyViaPostalAddress" class="hideSelect" onLoad="hideUnselected('postalAddress', 'applyViaPostalAddress')" onClick="hideUnselected('postalAddress', 'applyViaPostalAddress')"><label class="checkboxLabel" for="applyViaPostalAddress">Postal Address</label></legend>
 			<div class="postalAddress hidable">
 				<label for="applyViaPostalStreet">Steet Address</label>:
 				<input type="text" name="applyViaPostalStreet" id="applyViaPostalStreet"><br />
@@ -48,7 +48,7 @@
 			</div>
 		</fieldset>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaInPerson" id="applyViaInPerson" onClick="hideUnselected('inPerson', 'applyViaInPerson')"><label class="checkboxLabel" for="applyViaInPerson">In Person</label></legend>
+			<legend><input type="checkbox" name="applyVia" value="applyViaInPerson" id="applyViaInPerson" onLoad="hideUnselected('inPerson', 'applyViaInPerson')" onClick="hideUnselected('inPerson', 'applyViaInPerson')"><label class="checkboxLabel" for="applyViaInPerson">In Person</label></legend>
 			<div class="inPerson hidable">
 				<label for="applyViaInPersonStreet">Steet Address</label>:
 				<input type="text" name="applyViaInPersonStreet" id="applyViaInPersonStreet"><br />
@@ -63,11 +63,11 @@
 			</div>
 		</fieldset>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaEmail" id="applyViaEmail" onClick="hideUnselected('email', 'applyViaEmail')"><label class="checkboxLabel" for="applyViaEmail">Email</label></legend>
+			<legend><input type="checkbox" name="applyVia" value="applyViaEmail" id="applyViaEmail" onLoad="hideUnselected('email', 'applyViaEmail')" onClick="hideUnselected('email', 'applyViaEmail')"><label class="checkboxLabel" for="applyViaEmail">Email</label></legend>
 			<span class="hidable email"><label for="applyViaEmailAddres">Address</label>: <input  type="text" name="applyViaEmailAddress" id="applyViaEmailAddress"></span>
 		</fieldset>
 		<fieldset>
-			<legend><input type="checkbox" name="applyVia" value="applyViaWebsite" id="applyViaWebsite" onClick="hideUnselected('website', 'applyViaWebsite')"><label class="checkboxLabel" for="applyViaWebsite">Website</label></legend>
+			<legend><input type="checkbox" name="applyVia" value="applyViaWebsite" id="applyViaWebsite" onLoad="hideUnselected('website', 'applyViaWebsite')" onClick="hideUnselected('website', 'applyViaWebsite')"><label class="checkboxLabel" for="applyViaWebsite">Website</label></legend>
 			<span class="hidable website"><label for="applyViaWebsiteAddress">Address</label>: <input type="text" name="applyViaWebsiteAddress" id="applyViaWebsiteAddress"></span>
 		</fieldset>
 	</fieldset>
