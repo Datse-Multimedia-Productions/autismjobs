@@ -4,7 +4,9 @@
 $configFileName="config.yaml";
 
 // Load yaml file into variable
-$config=file_get_contents($configFileName);
+$configYAML=file_get_contents($configFileName);
+
+$config=yaml_parse($configYAML);
 
 //$config = array (
 //	"database" => array (
