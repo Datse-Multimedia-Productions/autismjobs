@@ -1,6 +1,7 @@
 <?php 
 
 require_once("model/servervars.php");
+require_once("model/database.php");
 
 switch ($action) {
 	case "index":
