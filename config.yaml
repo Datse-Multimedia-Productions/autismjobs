@@ -1,8 +1,8 @@
 database: 
-  type: "psql"
-  host: "localhost"
-  port: "5432"
-  dbname: "autismjobs"
-  user: "ajuser"
-  password: "Tia8cpw!"
+  type: "psql"         # Currently not used
+  host: "localhost"    # Hostname for your database connection
+  port: "5432"         # port number for your database connection
+  dbname: "autismjobs" # Database name.  Consider making your own
+  user: "ajuser"       # Database user.
+  password: "Tia8cpw!" # Password.  Use a secure one.
 configured: TRUE
