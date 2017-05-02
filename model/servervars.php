@@ -3,7 +3,11 @@
 $action=cleanGet("action");
 
 function cleanGet($index) {
-	return htmlentities($_GET[$index]);
+	if (array_key_exists($index, $_GET)) {
+		return htmlentities($_GET[$index]);
+	} else {
+		return null;
+	}
 }
 
 ?>
