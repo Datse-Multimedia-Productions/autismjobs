@@ -63,5 +63,4 @@ function checkDatabase ($configArray) {
 	
 }
 
-
 checkAll($config);
