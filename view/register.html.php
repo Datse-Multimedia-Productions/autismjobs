@@ -11,7 +11,7 @@ require_once("includes/header.html.php");
 require("includes/actions.html.include.php");
 ?>
 
-<h2>Add A Job Listing</h2>
+<h2>Register for site</h2>
 
 <?php include("includes/register.form.html.include.php"); ?>
 
