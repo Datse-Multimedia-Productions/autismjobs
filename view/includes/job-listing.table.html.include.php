@@ -1,5 +1,3 @@
-<p>This is old.  Please make it linked to the new stuff.</p>
-
 <form action="/index.php" method="post">
 	<label for="jobTitle">Job Title</label>:
 	<input type="text" name="jobTitle" id="jobTitle">

@@ -1,5 +1,3 @@
-<p>This is old.  Please link to new.</p>
-
 <form action="/index.php" method="post">
 	<label for="userame">Username</label>:
 	<input type="text" name="username" id="username"><br />
