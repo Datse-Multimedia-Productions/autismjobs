@@ -1,20 +1,20 @@
 <?php
 
-$dsn=$config["database"]["type"].
-":host=".$config["database"]["host"].
-";port=".$config["database"]["port"].
-";dbname=".$config["database"]["dbname"].
-";user=".$config["database"]["user"].
-";password=".$config["database"]["password"];
+// $dsn=$config["database"]["type"].
+// ":host=".$config["database"]["host"].
+// ";port=".$config["database"]["port"].
+// ";dbname=".$config["database"]["dbname"].
+// ";user=".$config["database"]["user"].
+// ";password=".$config["database"]["password"];
 
 $pgconnection="host=".$config['database']['host'].
 " dbname=".$config['database']['dbname'].
 " user=".$config['database']['user'].
 " password=".$config['database']['password'];
 
-echo $pgconnection;
+// echo $pgconnection;
 
-echo $dsn;
+// echo $dsn;
 
 //$dbh=new PDO($dsn);
 
