@@ -7,6 +7,13 @@ $dsn=$config["database"]["type"].
 ";user=".$config["database"]["user"].
 ";password=".$config["database"]["password"];
 
+$pgconnection="host=".$config['database']['host'].
+" dbname=".$config['database']['dbname'].
+" user=".$config['database']['user'].
+" password=".$config['database']['password'];
+
+echo $pgconnection;
+
 echo $dsn;
 
 //$dbh=new PDO($dsn);
