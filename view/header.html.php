@@ -7,4 +7,6 @@
 </head>
 <body>
 
+	<p>This is old, it should be updated</p>
+
 	<h1><?php echo "$pageHead"; ?></h1>
