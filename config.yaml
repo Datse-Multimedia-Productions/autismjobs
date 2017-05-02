@@ -2,7 +2,7 @@ database:
   type: "psql"
   host: "localhost"
   port: "5432"
-  dbname: "pleaseset"
-  user: "setuser"
-  password: "setpassword"
+  dbname: "autismjobs"
+  user: "ajuser"
+  password: "Tia8cpw!"
 configured: TRUE
