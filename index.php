@@ -1,6 +1,6 @@
 <?php 
 
-$configFileName="config.yaml"
+$configFileName="config.yaml";
 
 error_reporting(E_ALL & ~E_USER_NOTICE);
 
