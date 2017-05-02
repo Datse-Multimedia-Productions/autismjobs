@@ -20,7 +20,7 @@ echo $dsn;
 
 //$dbh=new PDO("mysql:host=localhost;port=5432;dbname=pleaseset;user=setuser;password=setpassword");
 
-$connection=pg_connect("host=localhost dbname=pleaseset user=setuser password=setpassword");
+$connection=pg_connect($pgconnection);
 
 ?>
 
