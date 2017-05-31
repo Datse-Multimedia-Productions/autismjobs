@@ -9,3 +9,6 @@ CREATE TABLE users (
 	lastlogin	TIMESTAMP
 )
 
+CREATE UNIQUE INDEX username_idx ON users (username);
+CREATE UNIQUE INDEX user_email_idx ON users (email);
+
