@@ -1,7 +1,10 @@
+CREATE EXTENSION pgcrypto;
+
 CREATE TABLE users (
-	userid		INT UNSIGNED PRIMARY KEY NOT NULL UNIQUE,
-	username	VARCHAR(80) NOT NULL,
-	password	CHAR(32) NOT NULL,
+	userid		uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+	username	text NOT NULL,
+	email		text NOT NULL
+	password	text  NOT NULL,
 	created		TIMESTAMP NOT NULL,
 	lastlogin	TIMESTAMP
 )
