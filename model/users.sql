@@ -7,7 +7,7 @@ CREATE TABLE users (
 	password	text  NOT NULL,
 	created		TIMESTAMP NOT NULL DEFAULT now(),
 	lastlogin	TIMESTAMP
-)
+);
 
 CREATE UNIQUE INDEX username_idx ON users (lower(username));
 CREATE UNIQUE INDEX user_email_idx ON users (lower(email));
