@@ -11,6 +11,14 @@ require_once("includes/header.html.php");
 
 <p>This will create the database tables</p>
 
+<h2>Create Database Tables</h2>
+
+<p>Select the database tables you want to create.</p>
+
+<?php 
+require_once("includes/create-form.include.html.php");
+?>
+
 <?php
 require_once("includes/actions.html.include.php");
 ?>
