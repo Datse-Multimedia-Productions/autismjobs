@@ -10,4 +10,12 @@ function cleanGet($index) {
 	}
 }
 
+function cleanPost($index) {
+	if (array_key_exists($index, $_POST)) {
+		return htmlentities($_POST[$index]);
+	} else {
+		return null;
+	}
+}
+
 ?>
