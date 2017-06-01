@@ -1,6 +1,6 @@
-CREATE EXTENSION pgcrypto;
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS  users (
 	userid		uuid PRIMARY KEY DEFAULT gen_random_uuid(),
 	username	text NOT NULL,
 	email		text NOT NULL,
@@ -9,6 +9,6 @@ CREATE TABLE users (
 	lastlogin	TIMESTAMP
 );
 
-CREATE UNIQUE INDEX username_idx ON users (lower(username));
-CREATE UNIQUE INDEX user_email_idx ON users (lower(email));
+CREATE UNIQUE INDEX IF NOT EXISTS username_idx ON users (lower(username));
+CREATE UNIQUE INDEX IF NOT EXISTS user_email_idx ON users (lower(email));
 
