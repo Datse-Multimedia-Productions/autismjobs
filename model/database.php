@@ -11,7 +11,11 @@ $connection=pg_connect($pgconnection);
 function createDatabaseTables($connection, $sqlfile) {
 	$sqlcommand = file_get_contents($sqlfile);
 	if ($sqlcommand) {
-		pg_query($connection, $sqlcommand);
+		$result = pg_query($connection, $sqlcommand);
+		if (!$result) {
+			echo "An error occured";
+			echo pg_last_error($connection);
+		}
 	}
 }
 
