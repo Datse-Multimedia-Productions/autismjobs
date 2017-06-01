@@ -12,14 +12,13 @@ require_once("includes/header.html.php");
 <p>These are the results of the database creation that you just did:</p>
 
 <?php 
-echo "I need to figure out how I am handling this";
-
 echo "<dl>";
 
 foreach($output as $table => $result) {
 	echo "<dt>$table</dt>";
 	echo "<dd>$result</dd>";
 }
+
 echo "</dl>";
 
 ?>
