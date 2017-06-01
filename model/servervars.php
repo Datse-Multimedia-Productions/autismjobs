@@ -20,7 +20,7 @@ function cleanPost($index) {
 
 function cleanPostArray($index) {
 	if (array_key_exists($index, $_POST)) {
-		if (is_array($_POST[$index]) {
+		if (is_array($_POST[$index])) {
 			foreach ($_POST($index) as $arrayval) {
 				$array[$index]=htmlentities($arrayval);
 			}
