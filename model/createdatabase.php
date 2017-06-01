@@ -11,6 +11,11 @@
  * @author Jigme Datse Yli-Rasku <jigme.datse@datemultimedia.com>
  * 
  * @todo We need to look at profiles and job listings still
+ * @todo We need to look at what happens when no database tables get selected
+ * @todo We need to look at dependencies:
+ * @todo profiles link to users, users needs to be created.
+ * @todo Need to look at handling existing successfully.
+ * @todo If table already exists, how to handle.
  *
  * @since 0.0.0 
  * @version 0.0.0 
