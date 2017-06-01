@@ -10,6 +10,10 @@ switch ($action) {
 	case "create":
 		require_once("view/admin/create.html.php");
 		break;
+	case "createsubmit"
+		require_once("model/createdatabase.php");
+		require_once("view/admin/createsubmit.html.php");
+		break;
 	default:
 		require_once("view/admin/index.html.php");
 }
