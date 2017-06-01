@@ -1,6 +1,6 @@
 <?php
 
-$tables=cleanPost("tables");
+$tables=cleanPostArray("tables");
 
 
 ?>
