@@ -38,7 +38,7 @@ function hideUnselected(hiddenClass, checkboxID) {
 	// gets the checkbox 
 	var checkbox = document.getElementById(checkboxID);
 
-	if (checkbox.is(':checked') {
+	if (checkbox.is(':checked')) {
 
 		// goes through list of elements to handle and displays them
 		for (var i = 0; i < hidableElements.length; i ++) {
