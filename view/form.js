@@ -38,22 +38,22 @@ function hideUnselected(hiddenClass, checkboxID) {
 	// gets the checkbox 
 	var checkbox = document.getElementById(checkboxID);
 
-	if (checkbox.is(':checked')) {
+	if (checkbox.checked) {
 
 		// goes through list of elements to handle and displays them
 		for (var i = 0; i < hidableElements.length; i ++) {
-    			//hidableElements[i].style.visibility = 'visible';
-    			//hidableElements[i].style.display = 'block';
-			hidableElements[i].show();
+    			hidableElements[i].style.visibility = 'visible';
+    			hidableElements[i].style.display = 'block';
+			//hidableElements[i].show;
 		}
 
 	} else { // checkbox is not checked
 
 		// goes through list of elements and hides them
 		for (var i = 0; i < hidableElements.length; i ++) {
-			//hidableElements[i].style.visibility = 'hidden';
-    			//hidableElements[i].style.display = 'none';
-			hidableElements[i].hide();
+			hidableElements[i].style.visibility = 'hidden';
+    			hidableElements[i].style.display = 'none';
+			//hidableElements[i].hide;
 		}
 
 	}
