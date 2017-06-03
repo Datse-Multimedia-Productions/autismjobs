@@ -21,4 +21,15 @@ label.checkboxLabel::after {
 	content: " ";
 }
 
-.hidable { visibility: hidden; display: none; }
+fieldset {
+	margin: 0.35em;
+}
+
+input {
+	margin: 0.15em;
+}
+
+.hidable { 
+	visibility: visible; 
+	display: none; 
+}
