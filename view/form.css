@@ -31,5 +31,5 @@ input {
 
 .hidable { 
 	visibility: visible; 
-	display: none; 
+	display: block; 
 }
