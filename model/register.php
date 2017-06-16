@@ -42,6 +42,7 @@ $passwordConfirm=cleanPost("passwordConfirm");
  * @version 0.0.0 
  */
 function registerUser($username, $email, $password, $passwordConfirm) {
+	$output[]="";
 	if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm) && $password===$passwordConfirm) {
 		$output["verify"]="Input verified";
 		$rows=pg_escape_identifier("username, email, password");
@@ -60,8 +61,13 @@ function registerUser($username, $email, $password, $passwordConfirm) {
 		$values=pg_escape_literal("$userid, $hash");
 		insertRecord($connection, "verifyusers", $rows, $values);
 		$output["verify user"]="Verification code created";
+	} else {
+		$output["error"]="an error occured";
 	}
-
+	return $output;
 }
+
+require_once("model/database.php");
+$output=registerUser($username, $email, $password, $passwordConfirm);
 
 ?>
