@@ -44,7 +44,24 @@ $passwordConfirm=cleanPost("passwordConfirm");
 function registerUser($username, $email, $password, $passwordConfirm) {
 	if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm) && $password===$passwordConfirm) {
 		$output["verify"]="Input verified";
-		
+		$rows=pg_escape_identifier("username, email, password");
+		$values=pg_escape_literal("$username, $email, $password");
+		insertRecord($connection, "users", $rows, $values);
+		$output["insert user"]="user record created";
+		$result=pg_query_params($connection, "SELECT userid FROM users WHERE email = $1", array($email));
+		$userid=pg_fetch_all($result);
+		print_r($userid);
+		for ($i=1; $i<=10; $i++) { 
+			$randnumbers[$i]=rand(0,1000); 
+		}
+		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] $rows $randmonumbers[6] $values $randomnumbers[7]"
+		$hash=md5($hashthis);
+		$rows=pg_escape_identifier("userid, checkhash");
+		$values=pg_escape_literal("$userid, $hash");
+		insertRecord($connection, "verifyusers", $rows, $values);
+		$output["verify user"]="Verification code created";
+	}
+
 }
 
 ?>
