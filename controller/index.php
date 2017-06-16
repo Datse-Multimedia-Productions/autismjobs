@@ -13,6 +13,10 @@ switch ($action) {
 	case "register":
 		require_once("view/register.html.php");
 		break;
+	case "registersubmit":
+		require_once("model/register.php");
+		require_once("view/registersubmit.html.php");
+		break;
 	default:
 		require_once("view/index.html.php");
 }
