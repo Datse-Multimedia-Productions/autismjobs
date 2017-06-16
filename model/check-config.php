@@ -2,6 +2,11 @@
 
 // This should check the configuration.
 
+// Load yaml file into variable
+$configYAML=file_get_contents($configFileName);
+
+$config=yaml_parse($configYAML);
+
 function checkAll($configArray) {
 	// checking configuration.
 	// checking database.
@@ -58,4 +63,4 @@ function checkDatabase ($configArray) {
 	
 }
 
-
+checkAll($config);

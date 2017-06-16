@@ -44,6 +44,7 @@ function hideUnselected(hiddenClass, checkboxID) {
 		for (var i = 0; i < hidableElements.length; i ++) {
     			hidableElements[i].style.visibility = 'visible';
     			hidableElements[i].style.display = 'block';
+			//hidableElements[i].show;
 		}
 
 	} else { // checkbox is not checked
@@ -52,6 +53,7 @@ function hideUnselected(hiddenClass, checkboxID) {
 		for (var i = 0; i < hidableElements.length; i ++) {
 			hidableElements[i].style.visibility = 'hidden';
     			hidableElements[i].style.display = 'none';
+			//hidableElements[i].hide;
 		}
 
 	}

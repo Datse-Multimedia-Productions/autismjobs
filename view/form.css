@@ -3,8 +3,33 @@ p     { display: table-row;  }
 label { display: table-cell; }
 input { display: table-cell; } */
 
-label { display: inline-block; width: 8em; text-align: right; }
+label { 
+	display: inline-block; 
+	width: 8em; 
+	text-align: left; 
+}
 
-label.checkboxLabel { display: inline; }
+label::after {
+	content: ":";
+}
 
-.hidable { visibility: hidden; display: none; }
+label.checkboxLabel { 
+	display: inline; 
+}
+
+label.checkboxLabel::after {
+	content: " ";
+}
+
+fieldset {
+	margin: 0.35em;
+}
+
+input {
+	margin: 0.15em;
+}
+
+.hidable { 
+	visibility: visible; 
+	display: block; 
+}
