@@ -54,7 +54,7 @@ function registerUser($username, $email, $password, $passwordConfirm) {
 		for ($i=1; $i<=10; $i++) { 
 			$randnumbers[$i]=rand(0,1000); 
 		}
-		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] $rows $randmonumbers[6] $values $randomnumbers[7]"
+		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] $rows $randmonumbers[6] $values $randomnumbers[7]";
 		$hash=md5($hashthis);
 		$rows=pg_escape_identifier("userid, checkhash");
 		$values=pg_escape_literal("$userid, $hash");
