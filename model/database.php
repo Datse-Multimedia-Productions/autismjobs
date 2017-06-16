@@ -19,5 +19,14 @@ function createDatabaseTables($connection, $sqlfile) {
 	}
 }
 
+function insertRecord($connection, $table, $rows, $values) {
+	$sqlcommand = "INSERT INTO $table ($rows) VALUES ($values);";
+	$result = pg_query($connection, $sqlcommand);
+	if (!$result) {
+		echo "An error occured";
+		echo pg_last_error($connection);
+	}
+}
+
 ?>
 
