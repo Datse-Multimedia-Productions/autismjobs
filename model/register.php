@@ -13,6 +13,7 @@
  * @todo Ensure email is properly stored
  * @todo Deal with email validation
  * @todo Test registration
+ * @todo Handle the possibility of issues with getting data through the post variables.
  *
  * @since 0.0.0 
  * @version 0.0.0 
@@ -41,7 +42,9 @@ $passwordConfirm=cleanPost("passwordConfirm");
  * @version 0.0.0 
  */
 function registerUser($username, $email, $password, $passwordConfirm) {
-
+	if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm) && $password===$passwordConfirm) {
+		$output["verify"]="Input verified";
+		
 }
 
 ?>
