@@ -19,10 +19,10 @@
  * @version 0.0.0 
  */
 
-$username=cleanPost("username");
-$email=cleanPost("email");
-$password=cleanPost("password");
-$passwordConfirm=cleanPost("passwordConfirm");
+$username=pg_escape_literal(cleanPost("username"));
+$email=pg_escape_literal(cleanPost("email"));
+$password=pg_escape_literal(cleanPost("password"));
+$passwordConfirm=pg_escape_literal(cleanPost("passwordConfirm"));
 
 /**
  * Register User 
@@ -41,24 +41,29 @@ $passwordConfirm=cleanPost("passwordConfirm");
  * @since 0.0.0 
  * @version 0.0.0 
  */
-function registerUser($username, $email, $password, $passwordConfirm) {
+function registerUser($connection, $username, $email, $password, $passwordConfirm) {
 	$output[]="";
 	if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm) && $password===$passwordConfirm) {
 		$output["verify"]="Input verified";
-		$rows=pg_escape_identifier("username, email, password");
-		$values=pg_escape_literal("$username, $email, $password");
+		$column[1]=pg_escape_identifier("username");
+		$column[2]=pg_escape_identifier("email");
+		$column[3]=pg_escape_identifier("password");
+		$rows="$column[1], $column[2], $column[3]";
+		$values="$username, $email, $password";
 		insertRecord($connection, "users", $rows, $values);
 		$output["insert user"]="user record created";
 		$result=pg_query_params($connection, "SELECT userid FROM users WHERE email = $1", array($email));
-		$userid=pg_fetch_all($result);
+		$userid=pg_escape_literal(pg_fetch_all($result));
 		print_r($userid);
 		for ($i=1; $i<=10; $i++) { 
 			$randomnumbers[$i]=rand(0,1000); 
 		}
-		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] $rows $randmonumbers[6] $values $randomnumbers[7]";
-		$hash=md5($hashthis);
-		$rows=pg_escape_identifier("userid, checkhash");
-		$values=pg_escape_literal("$userid, $hash");
+		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] $rows $randomnumbers[6] $values $randomnumbers[7]";
+		$hash=pg_escape_literal(md5($hashthis));
+		$column[1]=pg_escape_identifier("userid");
+		$column[2]=pg_escape_identifier("checkhash");
+		$rows="$column[1], $column[2]";
+		$values="$userid, $hash";
 		insertRecord($connection, "verifyusers", $rows, $values);
 		$output["verify user"]="Verification code created";
 	} else {
@@ -67,7 +72,7 @@ function registerUser($username, $email, $password, $passwordConfirm) {
 	return $output;
 }
 
-require_once("model/database.php");
-$output=registerUser($username, $email, $password, $passwordConfirm);
+//require_once("model/database.php");
+$output=registerUser($connection, $username, $email, $password, $passwordConfirm);
 
 ?>

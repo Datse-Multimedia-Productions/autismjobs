@@ -1,5 +1,6 @@
 <?php 
 
+require_once("controller/configure.php");
 require_once("model/servervars.php");
 require_once("model/database.php");
 
