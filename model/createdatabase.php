@@ -23,7 +23,6 @@
 
 $tables=cleanPostArray("tables");
 
-
 /**
  * Create the tables
  *
