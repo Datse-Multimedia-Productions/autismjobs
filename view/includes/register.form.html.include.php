@@ -1,4 +1,4 @@
-<form action="/index.php?action=register-submit" method="post">
+<form action="/index.php?action=registersubmit" method="post">
 	<label for="userame">Username</label>
 	<input type="text" name="username" id="username"><br />
 	<label for="email">Email</label>
