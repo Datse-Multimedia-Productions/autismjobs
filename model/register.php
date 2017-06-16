@@ -20,7 +20,7 @@
  */
 
 $username=cleanPost("username");
-$email=cleanPost("email")
+$email=cleanPost("email");
 $password=cleanPost("password");
 $passwordConfirm=cleanPost("passwordConfirm");
 
