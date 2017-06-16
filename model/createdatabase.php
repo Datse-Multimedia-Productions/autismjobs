@@ -32,6 +32,10 @@ foreach ($tables as $table) {
 			createDatabaseTables($connection, "model/users.sql");
 			$output[$table]="Table $table created";
 			break;
+		case "verifyusers":
+			createDatabaseTables($connection, "model/verifyusers.sql");
+			$output[$table]="Table $table created";
+			break;
 		default:
 			$output[$table]="No such table $table";
 	}
