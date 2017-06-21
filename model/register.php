@@ -79,7 +79,7 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$column[3]=pg_escape_identifier("verifytype");
 		$column[4]=pg_escape_identifier("verifystring");
 		$rows="$column[1], $column[2], $column[3], $column[4]";
-		$values="$theUserid, $hash, email, $escapedEmail";
+		$values="$theUserid, $hash, 'email', $escapedEmail";
 		insertRecord($connection, "verifyusers", $rows, $values);
 		$output["verify user"]="Verification code created";
 	} else {
