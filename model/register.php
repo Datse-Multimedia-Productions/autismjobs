@@ -53,7 +53,10 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$column[2]=pg_escape_identifier("email");
 		$column[3]=pg_escape_identifier("password");
 		$rows="$column[1], $column[2], $column[3]";
-		$values="$username, $email, $password";
+		$escapedUsername = pg_escape_literal($username);
+		$escapedEmail = pg_escape_literal($email);
+		$escapedPassword = pg_escape_literal($password);
+		$values="$escapedUsername, $escapedEmail, $escapedPassword";
 		insertRecord($connection, "users", $rows, $values);
 		$output["insert user"]="user record created";
 		$column[1]=pg_escape_identifier("userid");
@@ -71,8 +74,10 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$hash=pg_escape_literal(md5($hashthis));
 		$column[1]=pg_escape_identifier("userid");
 		$column[2]=pg_escape_identifier("checkhash");
-		$rows="$column[1], $column[2]";
-		$values="$userid, $hash";
+		$column[3]=pg_escape_identifier("verifytype");
+		$column[4]=pg_escape_identifier("verifystring");
+		$rows="$column[1], $column[2], $column[3], $column[4]";
+		$values="$userid, $hash, email, $escapedEmail";
 		insertRecord($connection, "verifyusers", $rows, $values);
 		$output["verify user"]="Verification code created";
 	} else {
