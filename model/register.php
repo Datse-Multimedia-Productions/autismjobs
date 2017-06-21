@@ -19,10 +19,10 @@
  * @version 0.0.0 
  */
 
-$username=pg_escape_literal(cleanPost("username"));
-$email=pg_escape_literal(cleanPost("email"));
-$password=pg_escape_literal(cleanPost("password"));
-$passwordConfirm=pg_escape_literal(cleanPost("passwordConfirm"));
+$username=cleanPost("username");
+$email=cleanPost("email");
+$password=cleanPost("password");
+$passwordConfirm=cleanPost("passwordConfirm");
 
 /**
  * Register User 
@@ -35,8 +35,12 @@ $passwordConfirm=pg_escape_literal(cleanPost("passwordConfirm"));
  * @license https://opensource.org/licenses/GPL-3.0 GNU Public License, version 3
  * @author Jigme Datse Yli-Rasku <jigme.datse@datemultimedia.com>
  * 
- * @todo Check data is sufficiently valid
- * @todo Insert user into database
+ * @todo Check data is sufficiently valid DONE?
+ * @todo Insert user into database DONE?
+ * @todo Get verification data entered correctly
+ * @todo Send Verification email (this will need to be a different function).
+ * @todo Process Verification attempt 
+ *       (This probably needs a different funtion too)
  *
  * @since 0.0.0 
  * @version 0.0.0 
