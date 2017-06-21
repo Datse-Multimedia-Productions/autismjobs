@@ -52,9 +52,14 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$values="$username, $email, $password";
 		insertRecord($connection, "users", $rows, $values);
 		$output["insert user"]="user record created";
-		$result=pg_query_params($connection, "SELECT userid FROM users WHERE email = $1", array($email));
-		$userid=pg_escape_literal(pg_fetch_all($result));
-		print_r($userid);
+		$column[1]=pg_escape_identifier("userid");
+		$column[2]="users";
+		$column[3]=pg_escape_identifier("email");
+		$result=pg_query_params($connection, "SELECT $column[1] FROM $column[2] WHERE $column[3] = $1", array($email));
+		$userid=pg_fetch_all($result);
+		echo "This should print the result userid";
+		var_dump($userid);
+		echo "Did we get anything?";
 		for ($i=1; $i<=10; $i++) { 
 			$randomnumbers[$i]=rand(0,1000); 
 		}
