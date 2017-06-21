@@ -66,7 +66,7 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$userid=pg_fetch_all($result);
 		echo "This should print the result userid";
 		var_dump($userid);
-		$theUserid=$userid[0]["userid];
+		$theUserid=$userid[0]["userid"];
 		var_dump($theUserid);
 		echo "Did we get anything?";
 		for ($i=1; $i<=10; $i++) { 
