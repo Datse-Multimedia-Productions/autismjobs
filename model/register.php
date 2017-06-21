@@ -66,6 +66,8 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$userid=pg_fetch_all($result);
 		echo "This should print the result userid";
 		var_dump($userid);
+		$theUserid=$userid[0]["userid];
+		var_dump($theUserid);
 		echo "Did we get anything?";
 		for ($i=1; $i<=10; $i++) { 
 			$randomnumbers[$i]=rand(0,1000); 
@@ -77,7 +79,7 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$column[3]=pg_escape_identifier("verifytype");
 		$column[4]=pg_escape_identifier("verifystring");
 		$rows="$column[1], $column[2], $column[3], $column[4]";
-		$values="$userid, $hash, email, $escapedEmail";
+		$values="$theUserid, $hash, email, $escapedEmail";
 		insertRecord($connection, "verifyusers", $rows, $values);
 		$output["verify user"]="Verification code created";
 	} else {
