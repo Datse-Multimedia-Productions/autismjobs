@@ -56,7 +56,7 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$escapedUsername = pg_escape_literal($username);
 		$escapedEmail = pg_escape_literal($email);
 		$escapedPassword = pg_escape_literal($password);
-		$values="$escapedUsername, $escapedEmail, crypt($escapedPassword, gen_salt('bf', 8)";
+		$values="$escapedUsername, $escapedEmail, crypt($escapedPassword, gen_salt('bf', 8))";
 		insertRecord($connection, "users", $rows, $values);
 		$output["insert user"]="user record created";
 		$column[1]=pg_escape_identifier("userid");
