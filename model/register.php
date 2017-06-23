@@ -24,6 +24,14 @@ $email=cleanPost("email");
 $password=cleanPost("password");
 $passwordConfirm=cleanPost("passwordConfirm");
 
+function sendVerificationEmail($hash, $userid, $type, $email) {
+	echo "<br />hash: $hash";
+	echo "<br />userid: $userid";
+	echo "<br />type: $type";
+	echo "<br />email: $email";
+	echo "<br />we need to do something with these values";
+}
+
 /**
  * Register User 
  *
@@ -49,26 +57,40 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 	$output[]="";
 	if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm) && $password===$passwordConfirm) {
 		$output["verify"]="Input verified";
-		$column[1]=pg_escape_identifier("username");
-		$column[2]=pg_escape_identifier("email");
-		$column[3]=pg_escape_identifier("password");
-		$rows="$column[1], $column[2], $column[3]";
-		$escapedUsername = pg_escape_literal($username);
-		$escapedEmail = pg_escape_literal($email);
-		$escapedPassword = pg_escape_literal($password);
-		$values="$escapedUsername, $escapedEmail, crypt($escapedPassword, gen_salt('bf', 8))";
+		// This needs to be better handled...
+		// Very similar code gets repeated several times here.
+		//$column[1]=pg_escape_identifier("username");
+		//$column[2]=pg_escape_identifier("email");
+		//$column[3]=pg_escape_identifier("password");
+		$rows=array("username", "email", "password");
+		//$escapedUsername = pg_escape_literal($username);
+		//$escapedEmail = pg_escape_literal($email);
+		//$escapedPassword = pg_escape_literal($password);
+		// This is badly broken, I need to figure out how to handle 
+		// the range of values which might exist better.  
+		// Do I still need to escape the "values" I pass to the
+		// fucntion?
+		// If the values get passed unescaped, that will mean that
+		// when I pass something like the
+		// crypt($password, gen_salt('bf', 8))
+		// call, it ends up getting escaped and gets inserted
+		// literally.  
+		// This might not be a big deal to pass them as they should
+		// appear in the insert call?
+		$values=array($username, $email, "crypt($escapedPassword, gen_salt('bf', 8))");
 		insertRecord($connection, "users", $rows, $values);
 		$output["insert user"]="user record created";
+		// I need to find a way to report errors here...  
 		$column[1]=pg_escape_identifier("userid");
 		$column[2]="users";
 		$column[3]=pg_escape_identifier("email");
 		$result=pg_query_params($connection, "SELECT $column[1] FROM $column[2] WHERE $column[3] = $1", array($email));
 		$userid=pg_fetch_all($result);
-		echo "This should print the result userid";
-		var_dump($userid);
+		// echo "This should print the result userid";
+		// var_dump($userid);
 		$theUserid=pg_escape_literal($userid[0]["userid"]);
-		var_dump($theUserid);
-		echo "Did we get anything?";
+		//var_dump($theUserid);
+		//echo "Did we get anything?";
 		for ($i=1; $i<=10; $i++) { 
 			$randomnumbers[$i]=rand(0,1000); 
 		}
@@ -82,6 +104,7 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$values="$theUserid, $hash, 'email', $escapedEmail";
 		insertRecord($connection, "verifyusers", $rows, $values);
 		$output["verify user"]="Verification code created";
+		sendVerificationEmail($hash, $theUserid, "email", $email);
 	} else {
 		$output["error"]="an error occured";
 	}
