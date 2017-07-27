@@ -78,77 +78,53 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 	$output[][]="";
 	if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm) && $password===$passwordConfirm) {
 		$output["status"]["verify"]="Input verified";
-		//echo "verified";
-		// This needs to be better handled...
-		// Very similar code gets repeated several times here.
-		//$column[1]=pg_escape_identifier("username");
-		//$column[2]=pg_escape_identifier("email");
-		//$column[3]=pg_escape_identifier("password");
+		
+		// Insert User Entry
 		$rows=array("username", "email", "password");
 		$escapedUsername = pg_escape_literal($username);
 		$escapedEmail = pg_escape_literal($email);
 		$escapedPassword = pg_escape_literal($password);
-		// This is badly broken, I need to figure out how to handle 
-		// the range of values which might exist better.  
-		// Do I still need to escape the "values" I pass to the
-		// fucntion?
-		// If the values get passed unescaped, that will mean that
-		// when I pass something like the
-		// crypt($password, gen_salt('bf', 8))
-		// call, it ends up getting escaped and gets inserted
-		// literally.  
-		// This might not be a big deal to pass them as they should
-		// appear in the insert call?
 		$values=array($escapedUsername, $escapedEmail, "crypt($escapedPassword, gen_salt('bf', 8))");
-		echo "<br />values: ";
-		var_dump($values);
-		echo "<br />rows: ";
-		var_dump($rows);
-		echo "<br />";
 		$output=$output + insertRecord($connection, "users", $rows, $values);
 		$output["status"]["insert user"]="user record created";
-		var_dump($output);
 
+		// Fetch User ID
 		// I need to find a way to report errors here...  
 		$column[1]=pg_escape_identifier("userid");
 		$column[2]="users";
 		$column[3]=pg_escape_identifier("email");
 		$result=pg_query_params($connection, "SELECT $column[1] FROM $column[2] WHERE $column[3] = $1", array($email));
 		$userid=pg_fetch_all($result);
-		// echo "This should print the result userid";
-		// var_dump($userid);
 		$theUserid=pg_escape_literal($userid[0]["userid"]);
-		//var_dump($theUserid);
-		//echo "Did we get anything?";
+		$output["status"]["get userID"]="User ID fetched.";
+
+		// Insert Verify Entry 
 		for ($i=1; $i<=10; $i++) { 
 			$randomnumbers[$i]=rand(0,1000); 
 		}
-		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] $rows $randomnumbers[6] $values $randomnumbers[7]";
+		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] ";
+		$hashthis = $hashthis . implode(", ", $rows) . " $randomnumbers[6] ";
+		$hashthis = $hashthis . implode(", ", $values) . " $randomnumbers[7]";
 		$hash=pg_escape_literal(md5($hashthis));
-		$column[1]="userid";
-		$column[2]="checkhash";
-		$column[3]="verifytype";
-		$column[4]="verifystring";
-		$rows=array($column[1], $column[2], $column[3], $column[4]);
+		$rows=array("userid", "checkhash", "verifytype", "verifystring");
 		$values=array($theUserid, $hash, "'email'", $escapedEmail);
-		$newOutput = insertRecord($connection, "verifyusers", $rows, $values);
-		$output=$output + $newOutput;
+		$output=$output + insertRecord($connection, "verifyusers", $rows, $values);
 		$output["status"]["verify user"]="Verification code created";
-		var_dump($output);
+		
+		// Send Verification Email
 		sendVerificationEmail($hash, $theUserid, "email", $email);
-	} else {
+		$output["status"]["verifcation email"]="Verification email sent";
+	} else { // data verification failed
 		$output["error"][]="an error occured";
 		$output["error"][]="Things not verified";
-		$output["error"][]=$username;
-		$output["error"][]=$email;
-		$output["error"][]=$password;
-		$output["error"][]=$passwordConfirm;
-		var_dump($output);
+		$output["error"][]="username: $username";
+		$output["error"][]="email: $email";
+		$output["error"][]="password: $password";
+		$output["error"][]="password confirm: $passwordConfirm";
 	}
 	return $output;
 }
 
-//require_once("model/database.php");
 $output=registerUser($connection, $username, $email, $password, $passwordConfirm);
 
 ?>

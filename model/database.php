@@ -83,14 +83,11 @@ function insertRecord($connection, $table, $rows, $values) {
 	$sqlcommand = "INSERT INTO $table ($parsedRows) VALUES ($parsedValues);";
 	$result = pg_query($connection, $sqlcommand);
 	if (!$result) {
-		echo "An error occured";
-		echo pg_last_error($connection);
 		$output["error"][]="Insert Failed";
 		$output["error"][]=pg_last_error($connection);
 		$output["error"][]=$parsedRows;
 		$output["error"][]=$parsedValues;
 	} else {
-		echo "success";
 		$output["status"][]="Insert Success";
 	}
 	return $output;
