@@ -24,6 +24,27 @@ $email=cleanPost("email");
 $password=cleanPost("password");
 $passwordConfirm=cleanPost("passwordConfirm");
 
+/**
+ * Send Email to user  
+ *
+ * This sends email to user.
+ *
+ * @param string $hash hash stored in database
+ * @param string $userid userid stored in database
+ * @param string $type What we are verifying
+ * @param string $email Email of person sending verification to
+ * 
+ * @copyright 2016-2017 Datse Multimedia Productions
+ * @license GPL
+ * @license https://opensource.org/licenses/GPL-3.0 GNU Public License, version 3
+ * @author Jigme Datse Yli-Rasku <jigme.datse@datemultimedia.com>
+ * @author Datse Multimedia Productions <info@datsemultimedia.com>
+ * 
+ * @todo Figure out how we are going to handle these values.
+ *
+ * @since 0.0.0 
+ * @version 0.0.0 
+ */
 function sendVerificationEmail($hash, $userid, $type, $email) {
 	echo "<br />hash: $hash";
 	echo "<br />userid: $userid";
@@ -54,18 +75,19 @@ function sendVerificationEmail($hash, $userid, $type, $email) {
  * @version 0.0.0 
  */
 function registerUser($connection, $username, $email, $password, $passwordConfirm) {
-	$output[]="";
+	$output[][]="";
 	if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm) && $password===$passwordConfirm) {
-		$output["verify"]="Input verified";
+		$output["status"]["verify"]="Input verified";
+		//echo "verified";
 		// This needs to be better handled...
 		// Very similar code gets repeated several times here.
 		//$column[1]=pg_escape_identifier("username");
 		//$column[2]=pg_escape_identifier("email");
 		//$column[3]=pg_escape_identifier("password");
 		$rows=array("username", "email", "password");
-		//$escapedUsername = pg_escape_literal($username);
-		//$escapedEmail = pg_escape_literal($email);
-		//$escapedPassword = pg_escape_literal($password);
+		$escapedUsername = pg_escape_literal($username);
+		$escapedEmail = pg_escape_literal($email);
+		$escapedPassword = pg_escape_literal($password);
 		// This is badly broken, I need to figure out how to handle 
 		// the range of values which might exist better.  
 		// Do I still need to escape the "values" I pass to the
@@ -77,9 +99,16 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		// literally.  
 		// This might not be a big deal to pass them as they should
 		// appear in the insert call?
-		$values=array($username, $email, "crypt($escapedPassword, gen_salt('bf', 8))");
-		insertRecord($connection, "users", $rows, $values);
-		$output["insert user"]="user record created";
+		$values=array($escapedUsername, $escapedEmail, "crypt($escapedPassword, gen_salt('bf', 8))");
+		echo "<br />values: ";
+		var_dump($values);
+		echo "<br />rows: ";
+		var_dump($rows);
+		echo "<br />";
+		$output=$output + insertRecord($connection, "users", $rows, $values);
+		$output["status"]["insert user"]="user record created";
+		var_dump($output);
+
 		// I need to find a way to report errors here...  
 		$column[1]=pg_escape_identifier("userid");
 		$column[2]="users";
@@ -96,17 +125,25 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		}
 		$hashthis="$randomnumbers[1] $username $randomnumbers[2] $email $randomnumbers[3] $password $randomnumbers[4] $passwordConfirm $randomnumbers[5] $rows $randomnumbers[6] $values $randomnumbers[7]";
 		$hash=pg_escape_literal(md5($hashthis));
-		$column[1]=pg_escape_identifier("userid");
-		$column[2]=pg_escape_identifier("checkhash");
-		$column[3]=pg_escape_identifier("verifytype");
-		$column[4]=pg_escape_identifier("verifystring");
-		$rows="$column[1], $column[2], $column[3], $column[4]";
-		$values="$theUserid, $hash, 'email', $escapedEmail";
-		insertRecord($connection, "verifyusers", $rows, $values);
-		$output["verify user"]="Verification code created";
+		$column[1]="userid";
+		$column[2]="checkhash";
+		$column[3]="verifytype";
+		$column[4]="verifystring";
+		$rows=array($column[1], $column[2], $column[3], $column[4]);
+		$values=array($theUserid, $hash, "'email'", $escapedEmail);
+		$newOutput = insertRecord($connection, "verifyusers", $rows, $values);
+		$output=$output + $newOutput;
+		$output["status"]["verify user"]="Verification code created";
+		var_dump($output);
 		sendVerificationEmail($hash, $theUserid, "email", $email);
 	} else {
-		$output["error"]="an error occured";
+		$output["error"][]="an error occured";
+		$output["error"][]="Things not verified";
+		$output["error"][]=$username;
+		$output["error"][]=$email;
+		$output["error"][]=$password;
+		$output["error"][]=$passwordConfirm;
+		var_dump($output);
 	}
 	return $output;
 }

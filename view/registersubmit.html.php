@@ -26,14 +26,21 @@ require_once("includes/header.html.php");
 <p>These are the results of the user registration that you just did:</p>
 
 <?php 
-echo "<dl>";
+echo "<ol>";
 
 foreach($output as $table => $result) {
-	echo "<dt>$table</dt>";
-	echo "<dd>$result</dd>";
+	echo "<dl><dt>$table</dt>";
+	echo "<dd>";
+
+	foreach ($result as $name => $message) {
+		echo "<dt>$name</dt>";
+		echo "<dd>$message</dd>";
+	}
+
+	echo "</dd></dl>";
 }
 
-echo "</dl>";
+echo "</ol>";
 
 ?>
 

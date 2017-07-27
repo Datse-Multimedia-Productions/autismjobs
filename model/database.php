@@ -66,12 +66,34 @@ function createDatabaseTables($connection, $sqlfile) {
  * @version 0.0.0 
  */
 function insertRecord($connection, $table, $rows, $values) {
-	$sqlcommand = "INSERT INTO $table ($rows) VALUES ($values);";
+	foreach ($rows as $index => $row) {
+		if ($index==0) {
+			$parsedRows = $row;
+		} else {
+			$parsedRows = "$parsedRows, $row";
+		}
+	}
+	foreach ($values as $index => $value) {
+		if ($index==0) {
+			$parsedValues = $value;
+		} else {
+			$parsedValues = "$parsedValues, $value";
+		}
+	}
+	$sqlcommand = "INSERT INTO $table ($parsedRows) VALUES ($parsedValues);";
 	$result = pg_query($connection, $sqlcommand);
 	if (!$result) {
 		echo "An error occured";
 		echo pg_last_error($connection);
+		$output["error"][]="Insert Failed";
+		$output["error"][]=pg_last_error($connection);
+		$output["error"][]=$parsedRows;
+		$output["error"][]=$parsedValues;
+	} else {
+		echo "success";
+		$output["status"][]="Insert Success";
 	}
+	return $output;
 }
 
 ?>
