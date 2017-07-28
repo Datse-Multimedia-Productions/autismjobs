@@ -46,6 +46,9 @@ $passwordConfirm=cleanPost("passwordConfirm");
  * @version 0.0.0 
  */
 function sendVerificationEmail($hash, $userid, $type, $email) {
+	// compose email body
+	// send message
+	// return result
 	echo "<br />hash: $hash";
 	echo "<br />userid: $userid";
 	echo "<br />type: $type";
@@ -66,7 +69,7 @@ function sendVerificationEmail($hash, $userid, $type, $email) {
  * 
  * @todo Check data is sufficiently valid DONE?
  * @todo Insert user into database DONE?
- * @todo Get verification data entered correctly
+ * @todo Get verification data entered correctly DONE?
  * @todo Send Verification email (this will need to be a different function).
  * @todo Process Verification attempt 
  *       (This probably needs a different funtion too)
