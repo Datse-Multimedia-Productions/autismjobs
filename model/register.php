@@ -47,8 +47,44 @@ $passwordConfirm=cleanPost("passwordConfirm");
  */
 function sendVerificationEmail($hash, $userid, $type, $email) {
 	// compose email body
+	$messageBody[] = "This is the first line of the message";
+	$messageBody[] = "This is the second line of the message";
+	$messageBody[] = "This is a really long line on the third line of the message, that in the end should end up getting wrapped.  It is far too long, and I want to handle it correctly.";
+	$messageTo = $email;
+	$messageSubject = "This is a test subject.  I hope it works.";
+	$messageHeaders[] = "From: info@autismjobs.ca";
+	$messageHeaders[] = "Reply-to: jigme.datse@autismjobs.ca";
+	$messageHeaders[] = "Bcc: jigme.datse@autismjobs.ca";
+	$messageHeaders[] = "X-Mailer: PHP/" . phpversion();
+
+	// Format Message Body
+	$sentBody = implode("\r\n \r\n", $messageBody);
+	$sentBody = wordwrap($sentBody, 70, "\r\n");
+
+	// Format Headers
+	$sentHeaders = implode("\r\n", $messageHeaders);
+
+	// Format To -- There may be some cleanup we want here.
+	$sentTo = $messageTo;
+
+	// Format Subject -- There may be some cleanup to do here too.
+	$sentSubject = $messageSubject;
+
+
 	// send message
+	$result = mail($sentTo, $sentSubject, $sentMessage, $sentHeaders);
+
 	// return result
+	if (!$result) {
+		$output["error"][] = "An Error occured sending your message";
+		$output["error"][] = error_get_last()["type"];
+		$output["error"][] = error_get_last()["message"];
+		$output["error"][] = error_get_last()["file"];
+		$output["error"][] = error_get_last()["line"];
+	} else {
+		$output["status"]["email"] = "Mail sent successfully";
+	}
+	$return $output;
 	echo "<br />hash: $hash";
 	echo "<br />userid: $userid";
 	echo "<br />type: $type";
