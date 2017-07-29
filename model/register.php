@@ -46,12 +46,25 @@ $passwordConfirm=cleanPost("passwordConfirm");
  * @version 0.0.0 
  */
 function sendVerificationEmail($hash, $userid, $type, $email) {
+	// hash userid
+	$mailid=md5($userid);
+
 	// compose email body
-	$messageBody[] = "This is the first line of the message";
-	$messageBody[] = "This is the second line of the message";
-	$messageBody[] = "This is a really long line on the third line of the message, that in the end should end up getting wrapped.  It is far too long, and I want to handle it correctly.";
+	$messageBody[] = "Hello,";
+	$messageBody[] = "Your email address has been registered at autismjobs.ca and needs to be verified before continuing on the autismjobs site.";
+	$messageBody[] = "To verify your email address click (or copy and paste if that does not work) on the following link:";
+	$messageBody[] = "http://autismjobs.ca/index.php?action=register_verify&email=$email&user=$mailid&hash=$hash";
+	$messageBody[] = "If you did not register please ignore this message, or respond to it, to inform our administrators that you did not register";
+	$messageBody[] = "Thank you,";
+	$messageBody[] = "Autism Jobs Administrators";
+	
+	// Set Destination email address
 	$messageTo = $email;
-	$messageSubject = "This is a test subject.  I hope it works.";
+
+	// Set Message Subject
+	$messageSubject = "Email Verification message for autismjobs.ca";
+
+	// Set Email Headers
 	$messageHeaders[] = "From: info@autismjobs.ca";
 	$messageHeaders[] = "Reply-to: jigme.datse@autismjobs.ca";
 	$messageHeaders[] = "Bcc: jigme.datse@autismjobs.ca";
@@ -72,7 +85,7 @@ function sendVerificationEmail($hash, $userid, $type, $email) {
 
 
 	// send message
-	$result = mail($sentTo, $sentSubject, $sentMessage, $sentHeaders);
+	$result = mail($sentTo, $sentSubject, $sentBody, $sentHeaders);
 
 	// return result
 	if (!$result) {
@@ -151,8 +164,9 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$output["status"]["verify user"]="Verification code created";
 		
 		// Send Verification Email
-		sendVerificationEmail($hash, $theUserid, "email", $email);
+		$output = $output + sendVerificationEmail($hash, $theUserid, "email", $email);
 		$output["status"]["verifcation email"]="Verification email sent";
+		echo "sent verification email";
 	} else { // data verification failed
 		$output["error"][]="an error occured";
 		$output["error"][]="Things not verified";
@@ -160,6 +174,7 @@ function registerUser($connection, $username, $email, $password, $passwordConfir
 		$output["error"][]="email: $email";
 		$output["error"][]="password: $password";
 		$output["error"][]="password confirm: $passwordConfirm";
+		echo "Sending Failed";
 	}
 	return $output;
 }
