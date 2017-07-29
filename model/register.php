@@ -84,7 +84,7 @@ function sendVerificationEmail($hash, $userid, $type, $email) {
 	} else {
 		$output["status"]["email"] = "Mail sent successfully";
 	}
-	$return $output;
+	return $output;
 	echo "<br />hash: $hash";
 	echo "<br />userid: $userid";
 	echo "<br />type: $type";
