@@ -69,6 +69,11 @@ function sendVerificationEmail($hash, $userid, $type, $email) {
 	$messageHeaders[] = "Reply-to: jigme.datse@autismjobs.ca";
 	$messageHeaders[] = "Bcc: jigme.datse@autismjobs.ca";
 	$messageHeaders[] = "X-Mailer: PHP/" . phpversion();
+	$messageHeaders[] = "Content-Type: text/plain; charset=\"utf-8\"";
+	$messageHeaders[] = "MIME-Version: 1.0";
+	$messageHeaders[] = "Content-Transfer-Encoding: quoted-printable";
+	$messageHeaders[] = "Content-Description: Mail message body";
+
 
 	// Format Message Body
 	$sentBody = implode("\r\n \r\n", $messageBody);
