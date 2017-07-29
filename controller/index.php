@@ -18,6 +18,9 @@ switch ($action) {
 		require_once("model/register.php");
 		require_once("view/registersubmit.html.php");
 		break;
+	case "register_verify":
+		require_once("model/registerverify.php");
+		require_once("view/registerverify.html.php");
 	default:
 		require_once("view/index.html.php");
 }
