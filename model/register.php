@@ -46,6 +46,9 @@ $passwordConfirm=cleanPost("passwordConfirm");
  * @version 0.0.0 
  */
 function sendVerificationEmail($hash, $userid, $type, $email) {
+	// Remove ' from $hash
+	$hash = trim($hash, "'");
+	
 	// hash userid
 	$mailid=md5($userid);
 
@@ -71,7 +74,6 @@ function sendVerificationEmail($hash, $userid, $type, $email) {
 	$messageHeaders[] = "X-Mailer: PHP/" . phpversion();
 	$messageHeaders[] = "Content-Type: text/plain; charset=\"utf-8\"";
 	$messageHeaders[] = "MIME-Version: 1.0";
-	$messageHeaders[] = "Content-Transfer-Encoding: quoted-printable";
 	$messageHeaders[] = "Content-Description: Mail message body";
 
 
