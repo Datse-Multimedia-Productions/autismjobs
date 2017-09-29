@@ -92,6 +92,7 @@ function verifyEmail($action, $email, $user, $hash) {
 		$whereValue[3]=pg_escape_literal($hash);
 
 		$sqlquery="SELECT $selectColumn[1], $selectColumn[2], $selectColumn[3], $selectColumn[4], $selectColumn[5], $selectColumn[6] FROM $tableName WHERE $whereColumn[1] = $1, $whereColumn[2] = $2, $whereColumn[3] = $3";
+		echo $sqlquery;
 
 		$result=pg_query_params($sqlquery, $whereValue);
 
