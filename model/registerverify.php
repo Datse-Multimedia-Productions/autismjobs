@@ -65,7 +65,7 @@ $hash=cleanGet("hash");
 * @version 0.0.0
 */
 function verifyEmail($action, $email, $user, $hash) {
-	if ($action=="register_verify" && !empty($email) && !empty($user) && !empty($hash) {
+	if ($action=="register_verify" && !empty($email) && !empty($user) && !empty($hash)) {
 		$output["status"]["data verification"]="Data verifies (we can use it)";
 //                $column[1]=pg_escape_identifier("userid");
 //                $column[2]="users";
