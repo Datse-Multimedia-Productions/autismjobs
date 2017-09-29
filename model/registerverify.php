@@ -67,6 +67,37 @@ $hash=cleanGet("hash");
 function verifyEmail($action, $email, $user, $hash) {
 	if ($action=="register_verify" && !empty($email) && !empty($user) && !empty($hash) {
 		$output["status"]["data verification"]="Data verifies (we can use it)";
+//                $column[1]=pg_escape_identifier("userid");
+//                $column[2]="users";
+//                $column[3]=pg_escape_identifier("email");
+//                $result=pg_query_params($connection, "SELECT $column[1] FROM $column[2] WHERE $column[3] = $1", array($email));
+//                $userid=pg_fetch_all($result);
+
+// Copy from Register, check how we handle this here...
+
+		$selectColumn[1]=pg_escape_identifier("userid");
+		$selectColumn[2]=pg_escape_identifier("checkhash");
+		$selectColumn[3]=pg_escape_identifier("verifystring");
+		$selectColumn[4]=pg_escape_identifier("verifytype");
+		$selectColumn[5]=pg_escape_identifier("created");
+		$selectColumn[6]=pg_escape_identifier("verified");
+		$tableName="verifyusers";
+
+		$whereColumn[1]=pg_escape_identifier("verifystring");
+		$whereColumn[2]=pg_escape_identifier("verifytype");
+		$whereColumn[3]=pg_escape_identifier("checkhash");
+
+		$whereValue[1]=pg_escape_literal($email);
+		$whereValue[2]=pg_escape_literal("email");
+		$whereValue[3]=pg_escape_literal($hash);
+
+		$sqlquery="SELECT $selectColumn[1], $selectColumn[2], $selectColumn[3], $selectColumn[4], $selectColumn[5], $selectColumn[6] FROM $tableName WHERE $whereColumn[1] = $1, $whereColumn[2] = $2, $whereColumn[3] = $3"
+
+		$result=pg_query_params($sqlquery, whereValue)
+
+		$theValues = pg_fetch_all($result);
+
+		var_export($theValues);
 
 	} else {
 		$output["status"]["data verification"]="Data Verification Failed";
