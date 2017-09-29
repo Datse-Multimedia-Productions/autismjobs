@@ -102,5 +102,8 @@ function verifyEmail($action, $email, $user, $hash) {
 	} else {
 		$output["status"]["data verification"]="Data Verification Failed";
 	}
+	return($output);
 }
+
+$output=verifyEmail($action, $email, $user, $hash);
 ?>
