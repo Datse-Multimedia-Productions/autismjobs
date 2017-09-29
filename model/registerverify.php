@@ -93,7 +93,7 @@ function verifyEmail($action, $email, $user, $hash) {
 
 		$sqlquery="SELECT $selectColumn[1], $selectColumn[2], $selectColumn[3], $selectColumn[4], $selectColumn[5], $selectColumn[6] FROM $tableName WHERE $whereColumn[1] = $1, $whereColumn[2] = $2, $whereColumn[3] = $3";
 
-		$result=pg_query_params($sqlquery, whereValue);
+		$result=pg_query_params($sqlquery, $whereValue);
 
 		$theValues = pg_fetch_all($result);
 
