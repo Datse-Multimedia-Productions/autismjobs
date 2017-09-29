@@ -27,6 +27,20 @@
  * @version 0.0.0 
  */
 
+//http://autismjobs.ca/index.php?
+// action=register_verify
+// email=$email
+// user=$mailid
+// hash=$hash
+
+//These are the values I am working with.  
+
+$action=cleanGet("action");
+$email=cleanGet("email");
+$user=cleanGet("user");
+$hash=cleanGet("hash);
+
+
 
 
 ?>
