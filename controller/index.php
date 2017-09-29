@@ -19,8 +19,12 @@ switch ($action) {
 		require_once("view/registersubmit.html.php");
 		break;
 	case "register_verify":
+		echo "Register Verification";
 		require_once("model/registerverify.php");
+		echo "Code Run";
 		require_once("view/registerverify.html.php");
+		echo "Page Displayed";
+		break;
 	default:
 		require_once("view/index.html.php");
 }
