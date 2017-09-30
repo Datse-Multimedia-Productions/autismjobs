@@ -87,17 +87,24 @@ function verifyEmail($action, $email, $user, $hash) {
 		$whereColumn[2]=pg_escape_identifier("verifytype");
 		$whereColumn[3]=pg_escape_identifier("checkhash");
 
-		$whereValue[1]=pg_escape_literal($email);
-		$whereValue[2]=pg_escape_literal("email");
-		$whereValue[3]=pg_escape_literal($hash);
+		$cleanHash=trim($hash, "'");
 
-		$sqlquery="SELECT $selectColumn[1], $selectColumn[2], $selectColumn[3], $selectColumn[4], $selectColumn[5], $selectColumn[6] FROM $tableName WHERE $whereColumn[1] = $1, $whereColumn[2] = $2, $whereColumn[3] = $3";
+		$whereValue[]=$email;
+		$whereValue[]="email";
+		$whereValue[]=md5($cleanHash);
+
+		$sqlquery="SELECT $selectColumn[1], $selectColumn[2], $selectColumn[3], $selectColumn[4], $selectColumn[5], $selectColumn[6] FROM $tableName WHERE $whereColumn[1] = $1 AND $whereColumn[2]=$2 AND $whereColumn[3]=$3";
+		
+		echo "<p>sqlquery: ";
 		echo $sqlquery;
+		echo "</p><p>whereValue: ";
+		var_export($whereValue);
 
-		$result=pg_query_params($sqlquery, $whereValue);
+		$result=pg_query_params($sqlquery, array($whereValue[0], $whereValue[1], $whereValue[2]));
 
 		$theValues = pg_fetch_all($result);
 
+		echo "</p><p>theValues: ";
 		var_export($theValues);
 
 	} else {
