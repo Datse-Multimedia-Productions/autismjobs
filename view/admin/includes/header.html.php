@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title><?php echo "$title"; ?></title>
-	<link rel=\"stylesheet" type="text/css" href="view/form.css">
+	<link rel="stylesheet" type="text/css" href="view/form.css">
 	<script src="view/form.js"></script>
 </head>
 <body>

@@ -42,11 +42,11 @@ $tables=cleanPostArray("tables");
 foreach ($tables as $table) {
 	switch ($table) {
 		case "users":
-			createDatabaseTables($connection, "model/users.sql");
+			createDatabaseTables($connection, "model/sql/users.sql");
 			$output[$table]="Table $table created";
 			break;
 		case "verifyusers":
-			createDatabaseTables($connection, "model/verifyusers.sql");
+			createDatabaseTables($connection, "model/sql/verifyusers.sql");
 			$output[$table]="Table $table created";
 			break;
 		default:
