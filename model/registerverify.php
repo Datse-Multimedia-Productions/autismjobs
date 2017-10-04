@@ -80,27 +80,29 @@ function verifyEmail($action, $email, $user, $hash) {
 		$selectColumn[3]=pg_escape_identifier("verifystring");
 		$selectColumn[4]=pg_escape_identifier("verifytype");
 		$selectColumn[5]=pg_escape_identifier("created");
-		$selectColumn[6]=pg_escape_identifier("verified");
+		
+		$setColumn[1]=pg_escape_identifier("verified");
+		
 		$tableName="verifyusers";
 
 		$whereColumn[1]=pg_escape_identifier("verifystring");
 		$whereColumn[2]=pg_escape_identifier("verifytype");
 		$whereColumn[3]=pg_escape_identifier("checkhash");
 
-		$cleanHash=trim($hash, "'");
+		//$cleanHash=trim($hash, "'");
 
 		$whereValue[]=$email;
 		$whereValue[]="email";
-		$whereValue[]=md5($cleanHash);
+		$whereValue[]=$hash;
 
-		$sqlquery="SELECT $selectColumn[1], $selectColumn[2], $selectColumn[3], $selectColumn[4], $selectColumn[5], $selectColumn[6] FROM $tableName WHERE $whereColumn[1] = $1 AND $whereColumn[2]=$2 AND $whereColumn[3]=$3";
+		$sqlquery="UPDATE $tableName SET $setColumn[1]=now()  WHERE $whereColumn[1] = $1 AND $whereColumn[2]=$2 AND $whereColumn[3]=$3";
 		
 		echo "<p>sqlquery: ";
 		echo $sqlquery;
 		echo "</p><p>whereValue: ";
 		var_export($whereValue);
 
-		$result=pg_query_params($sqlquery, array($whereValue[0], $whereValue[1], $whereValue[2]));
+		$result=pg_query_params($sqlquery, $whereValue);
 
 		$theValues = pg_fetch_all($result);
 
