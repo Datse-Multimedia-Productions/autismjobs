@@ -80,6 +80,8 @@ function verifyEmail($action, $email, $user, $hash) {
 		$selectColumn[3]=pg_escape_identifier("verifystring");
 		$selectColumn[4]=pg_escape_identifier("verifytype");
 		$selectColumn[5]=pg_escape_identifier("created");
+		$selectColumn[6]=pg_escape_identifier("verified");
+
 		
 		$setColumn[1]=pg_escape_identifier("verified");
 		
@@ -88,6 +90,7 @@ function verifyEmail($action, $email, $user, $hash) {
 		$whereColumn[1]=pg_escape_identifier("verifystring");
 		$whereColumn[2]=pg_escape_identifier("verifytype");
 		$whereColumn[3]=pg_escape_identifier("checkhash");
+		$whereColumn[4]=pg_escape_identifier("verified");
 
 		//$cleanHash=trim($hash, "'");
 
@@ -95,19 +98,23 @@ function verifyEmail($action, $email, $user, $hash) {
 		$whereValue[]="email";
 		$whereValue[]=$hash;
 
-		$sqlquery="UPDATE $tableName SET $setColumn[1]=now()  WHERE $whereColumn[1] = $1 AND $whereColumn[2]=$2 AND $whereColumn[3]=$3";
+		$sqlquery="UPDATE $tableName SET $setColumn[1]=now()  WHERE $whereColumn[1] = $1 AND $whereColumn[2]=$2 AND $whereColumn[3]=$3 AND $whereColumn[4]=NULL";
 		
-		echo "<p>sqlquery: ";
-		echo $sqlquery;
-		echo "</p><p>whereValue: ";
-		var_export($whereValue);
+		//echo "<p>sqlquery: ";
+		//echo $sqlquery;
+		//echo "</p><p>whereValue: ";
+		//var_export($whereValue);
+
+		$sqlquery="SELECT $selectColumn[6] FROM $tableName WHERE $whereColumn[1] = $1 AND $whereColumn[2]=$2 AND $whereColumn[3]=$3";
 
 		$result=pg_query_params($sqlquery, $whereValue);
 
 		$theValues = pg_fetch_all($result);
 
-		echo "</p><p>theValues: ";
-		var_export($theValues);
+		//echo "</p><p>theValues: ";
+		//var_export($theValues);
+
+		$output["status"]["Email Address Verified"]=$theValues[0]["verified"];
 
 	} else {
 		$output["status"]["data verification"]="Data Verification Failed";
